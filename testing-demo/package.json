@@ -7,8 +7,11 @@
     "test": "tests"
   },
   "scripts": {
-    "jest": "jest --env=node --colors --coverage test",
-    "test": "npm run jest"
+    "test": "jest"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
   },
   "keywords": [],
   "author": "",

@@ -1,3 +1,3 @@
 test("first test", () => {
-  // throw new Error("something is failed");
+  throw new Error("something is failed");
 });
