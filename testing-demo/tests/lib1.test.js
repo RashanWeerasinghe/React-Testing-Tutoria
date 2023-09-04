@@ -49,3 +49,29 @@ describe("getCurrencies", () => {
     expect(result).toEqual(expect.arrayContaining(["USD", "AUD", "EUR"]));
   });
 });
+
+describe("getProduct", () => {
+  it("should return the product with given id", () => {
+    const result = lib.getProduct(1);
+    expect(result).toEqual({ id: 1, price: 10 });
+    expect(result).toMatchObject({ id: 1, price: 10 });
+    expect(result).toHaveProperty("id", 1);
+  });
+});
+
+describe("register User", () => {
+  it("should trow if username is falsy", () => {
+    const array = [null, undefined, NaN, "", 0, false];
+    array.forEach((a) =>
+      expect(() => {
+        lib.registerUser(a);
+      }).toThrow()
+    );
+  });
+
+  it("should return a user object if valid username is passed", () => {
+    const result = lib.registerUser("rashan");
+    expect(result).toMatchObject({ username: "rashan" });
+    expect(result.id).toBeGreaterThan(0);
+  });
+});
