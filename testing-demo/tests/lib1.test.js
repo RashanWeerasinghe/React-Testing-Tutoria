@@ -25,3 +25,27 @@ describe("greet", () => {
     expect(result).toBe("Welcome Rashan");
   });
 });
+
+describe("getCurrencies", () => {
+  it("should return supported Currencies", () => {
+    const result = lib.getCurrencies();
+
+    //to general
+    expect(result).toBeDefined();
+    expect(result).not.toBeNull();
+
+    //"USD", "AUD", "EUR"
+    //too specific
+    expect(result[0]).toBe("USD");
+    expect(result[1]).toBe("AUD");
+    expect(result[2]).toBe("EUR");
+    expect(result.length).toBe(3);
+
+    //Proper Way
+    expect(result).toContain("USD");
+    expect(result).toContain("AUD");
+    expect(result).toContain("EUR");
+    //Ideal Way
+    expect(result).toEqual(expect.arrayContaining(["USD", "AUD", "EUR"]));
+  });
+});
