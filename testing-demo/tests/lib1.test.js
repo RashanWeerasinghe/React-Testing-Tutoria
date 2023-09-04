@@ -1,7 +1,7 @@
 const lib = require("../lib");
-
-test("first test", () => {});
-
+const exercise = require("../exercise1");
+const db = require("../db");
+const mail = require("../mail");
 describe("absolute", () => {
   it("should return positive number if input is positive", () => {
     const result = lib.absolute(1);
@@ -73,5 +73,47 @@ describe("register User", () => {
     const result = lib.registerUser("rashan");
     expect(result).toMatchObject({ username: "rashan" });
     expect(result.id).toBeGreaterThan(0);
+  });
+});
+
+describe("fizzBuzz", () => {
+  it("should trow if input type isn't number", () => {
+    expect(() => exercise.fizzBuzz("test")).toThrow();
+  });
+  it("input is % 3 and 5", () => {
+    const result = exercise.fizzBuzz(15);
+    expect(result).toBe("FizzBuzz");
+  });
+  it("input is % only 3 ", () => {
+    const result = exercise.fizzBuzz(3);
+    expect(result).toBe("Fizz");
+  });
+  it("input is % only 5", () => {
+    const result = exercise.fizzBuzz(5);
+    expect(result).toBe("Buzz");
+  });
+  it("input isn't % 3 and 5", () => {
+    const result = exercise.fizzBuzz(1);
+    expect(result).toBe(1);
+  });
+});
+
+describe("applyDiscount", () => {
+  it("should apply 10% discount if customer has more than 10 points", () => {});
+  db.getCustomerSync = function (CustomerId) {
+    console.log("Fake reading customer...");
+    return { id: CustomerId, points: 20 };
+  };
+  const order = { CustomerId: 1, totalPrice: 10 };
+  lib.applyDiscount(order);
+  expect(order.totalPrice).toBe(9);
+});
+
+describe("notifyCustomer", () => {
+  it("should send an email to the customer", () => {
+    db.getCustomerSync = function (CustomerId) {
+      return { email: "a" };
+    };
+    lib.notifyCustomer(order);
   });
 });
