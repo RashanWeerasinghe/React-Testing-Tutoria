@@ -25,5 +25,6 @@ describe("TodoController.createTodo", () => {
     expect(todoModel.create).toBeCalledWith(newTodo);
 
     expect(res.statusCode).toBe(201);
+    expect(res._isEndCalled()).toBeTruthy();
   });
 });
